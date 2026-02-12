@@ -1,126 +1,134 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Hug Day 🤍</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body{
-      margin:0;
-      height:100vh;
-      background:linear-gradient(135deg,#ff758c,#ff7eb3);
-      font-family:Arial;
-      color:white;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      text-align:center;
-    }
-    .box{padding:25px;}
-    button{
-      padding:16px 35px;
-      border:none;
-      border-radius:40px;
-      font-size:18px;
-      font-weight:bold;
-      margin-top:20px;
-    }
-    .hidden{display:none;}
-  </style>
+<meta charset="UTF-8">
+<title>For Nikkkiiiiiii 🤍</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap');
+
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  font-family: 'Playfair Display', serif;
+  background: radial-gradient(circle at top, #ffd6e8, #b983ff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+.container {
+  text-align: center;
+  z-index: 10;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+button {
+  margin-top: 25px;
+  padding: 16px 40px;
+  border: none;
+  border-radius: 40px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  background: #fff;
+  color: #b983ff;
+  cursor: pointer;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+}
+
+#hugText {
+  margin-top: 25px;
+  font-size: 1.3rem;
+  display: none;
+  animation: fadeIn 2s ease;
+  line-height: 1.6;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Blossom petals */
+.petal {
+  position: absolute;
+  top: -10px;
+  font-size: 22px;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+</style>
 </head>
 
 <body>
 
-<div class="box">
+<div class="container">
+  <h1>Nikkkiiiiiii 🤍</h1>
+  <p>If distance disappeared right now,<br>I’d be hugging you.</p>
 
-  <!-- STAGE 1 -->
-  <div id="stage1">
-    <h1>Happy Hug Day Nikkkiiiiiii 🤍</h1>
-    <p>This hug is locked 🔒</p>
-    <button onclick="unlock1()">Unlock My Hug 🫂</button>
+  <button onclick="hug()">Hug Me 🫂</button>
+
+  <div id="hugText">
+    🤍 This is me holding you 🤍<br>
+    Stay here for a moment.<br>
+    You are safe. You are loved.
   </div>
-
-  <!-- STAGE 2 -->
-  <div id="stage2" class="hidden">
-    <h2>Hold me for 5 seconds 🤍</h2>
-    <button 
-      ontouchstart="startHold()" 
-      ontouchend="endHold()">
-      Hold Hug 🫂
-    </button>
-    <p id="timer"></p>
-  </div>
-
-  <!-- STAGE 3 -->
-  <div id="stage3" class="hidden">
-    <h2>Don’t rush…</h2>
-    <p>Let this hug sink in 💞</p>
-    <p>Unlocking secret in <span id="count">5</span>...</p>
-  </div>
-
-  <!-- FINAL MESSAGE -->
-  <div id="final" class="hidden">
-    <h2>🤍 This is me hugging you 🤍</h2>
-    <p>
-      If distance was gone,<br>
-      I’d never let you go.<br><br>
-      You are safe.<br>
-      You are loved.<br>
-      And you are always mine.
-    </p>
-  </div>
-
-  <audio id="music">
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
-  </audio>
-
 </div>
 
+<audio id="music">
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3">
+</audio>
+
 <script>
-let holdTime=0, holdInterval;
+function hug() {
 
-// STAGE 1
-function unlock1(){
-  if(navigator.vibrate) navigator.vibrate([300,200,300]);
-  document.getElementById("music").play();
-  stage1.style.display="none";
-  stage2.style.display="block";
+  // vibration
+  if (navigator.vibrate) {
+    navigator.vibrate([200,100,200,100,400]);
+  }
+
+  // show message
+  document.getElementById("hugText").style.display = "block";
+
+  // play music
+  const music = document.getElementById("music");
+  music.volume = 0.5;
+  music.play();
+
+  // blossom rain
+  for (let i = 0; i < 35; i++) {
+    createPetal();
+  }
 }
 
-// STAGE 2 – HOLD
-function startHold(){
-  holdTime=0;
-  holdInterval=setInterval(()=>{
-    holdTime++;
-    document.getElementById("timer").innerText=
-      "Holding... "+holdTime+"s";
-    if(navigator.vibrate) navigator.vibrate(80);
-    if(holdTime>=5){
-      clearInterval(holdInterval);
-      stage2.style.display="none";
-      stage3.style.display="block";
-      countdown();
-    }
-  },1000);
-}
+function createPetal() {
+  const petal = document.createElement("div");
+  petal.className = "petal";
+  petal.innerHTML = "🌸";
+  petal.style.left = Math.random() * 100 + "vw";
+  petal.style.animationDuration = (Math.random() * 4 + 4) + "s";
+  document.body.appendChild(petal);
 
-function endHold(){
-  clearInterval(holdInterval);
-  document.getElementById("timer").innerText="";
-}
-
-// STAGE 3 – COUNTDOWN
-function countdown(){
-  let c=5;
-  let x=setInterval(()=>{
-    c--;
-    document.getElementById("count").innerText=c;
-    if(c==0){
-      clearInterval(x);
-      stage3.style.display="none";
-      final.style.display="block";
-      if(navigator.vibrate) navigator.vibrate([500,200,500]);
-    }
-  },1000);
+  setTimeout(() => petal.remove(), 8000);
 }
 </script>
 
